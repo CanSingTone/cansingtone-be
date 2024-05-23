@@ -14,6 +14,7 @@ public class ResSongDto {
     public ResSongDto(Song song) {
         this.songId = song.getSongId();
         this.songTitle = song.getSongTitle();
+        this.albumImage = song.getAlbumImage();
         this.artist = song.getArtist();
         this.genre = song.getGenre();
         this.artistGender = song.getArtistGender();
@@ -28,6 +29,9 @@ public class ResSongDto {
 
     @Schema(description = "노래명", example = "cansingtone")
     private String songTitle;
+
+    @Schema(description = "앨범 이미지 URL", example = "https://www.cansingtone.com/album/1")
+    private String albumImage;
 
     @Schema(description = "아티스트", example = "1")
     private String artist;
