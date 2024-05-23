@@ -6,10 +6,13 @@ import com.tlc.cansingtone.repository.SongRepository;
 import com.tlc.cansingtone.exception.BusinessException;
 import com.tlc.cansingtone.exception.ErrorCode;
 
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.criteria.Predicate;
 
 @Service
 public class SongService {
@@ -17,11 +20,6 @@ public class SongService {
 
     public SongService(SongRepository songRepository) {
         this.songRepository = songRepository;
-    }
-
-    public List<Song> getSongs() {
-        List<Song> songs = songRepository.findAll();
-        return songs;
     }
 
     public ResSongDto getSongbySongId(Long songId) {
@@ -35,18 +33,26 @@ public class SongService {
         return songs;
     }
 
-    public List<Song> getSongsbyGenreAndVocalRange(int highestNote, int lowestNote) {
-        // highestNote가 null인 경우 가장 높은 음으로 설정
-        if (highestNote == -1) {
-            highestNote = Integer.MAX_VALUE;
-        }
-        // lowestNote가 null인 경우 가장 낮은 음으로 설정
-        if (lowestNote == -1) {
-            lowestNote = Integer.MIN_VALUE;
-        }
+    public List<Song> getSongsByGenreAndVocalRange(List<Integer> genres, Integer highestNote, Integer lowestNote) {
 
-        // highestNote가 입력받은 highestNote보다 낮고 lowestNote가 입력받은 lowestNote보다 높은 곡을 검색합니다.
-        List<Song> songs = songRepository.findByHighestNoteLessThanAndLowestNoteGreaterThan(highestNote, lowestNote);
-        return songs;
+        final int maxNote = (highestNote == -1) ? Integer.MAX_VALUE : highestNote;
+        final int minNote = (lowestNote == -1) ? Integer.MIN_VALUE : lowestNote;
+
+        Specification<Song> spec = (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            // Genre filtering
+            if (genres != null && !genres.isEmpty()) {
+                predicates.add(root.get("genre").in(genres));
+            }
+
+            // Vocal range filtering
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("highestNote"), maxNote));
+            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("lowestNote"), minNote));
+
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
+
+        return songRepository.findAll(spec);
     }
 }

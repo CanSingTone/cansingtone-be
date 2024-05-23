@@ -51,13 +51,14 @@ public class SongController {
         }
     }
 
+    @Operation(summary = "장르 및 음역대로 곡 필터링")
     @GetMapping("/filter")
-    public BaseResponse<List<ResSongDto>> getSongsbyGenreAndVoclalRange(
-            @RequestParam(name = "highest_note", required = false, defaultValue = "-1") int highestNote,
-            @RequestParam(name = "lowest_note", required = false, defaultValue = "-1") int lowestNote) {
+    public BaseResponse<List<ResSongDto>> getSongsByGenreAndVocalRange(
+            @RequestParam(name = "genres", required = false) List<Integer> genres,
+            @RequestParam(name = "highest_note", required = false, defaultValue = "-1") Integer highestNote,
+            @RequestParam(name = "lowest_note", required = false, defaultValue = "-1") Integer lowestNote) {
         try {
-            List<Song> songs = songService.getSongsbyGenreAndVocalRange(highestNote, lowestNote);
-
+            List<Song> songs = songService.getSongsByGenreAndVocalRange(genres, highestNote, lowestNote);
             List<ResSongDto> responseSongs = songs.stream()
                     .map(ResSongDto::new)
                     .collect(Collectors.toList());
