@@ -28,12 +28,12 @@ public class SongService {
         return response;
     }
 
-    public List<Song> getSongsbyTitleOrArtist(String keyword) {
-        List<Song> songs = songRepository.findByArtistContainingIgnoreCaseOrSongTitleContainingIgnoreCase(keyword, keyword);
-        return songs;
-    }
+//    public List<Song> getSongsbyTitleOrArtist(String keyword) {
+//        List<Song> songs = songRepository.findByArtistContainingIgnoreCaseOrSongTitleContainingIgnoreCase(keyword, keyword);
+//        return songs;
+//    }
 
-    public List<Song> getSongsByGenreAndVocalRange(List<Integer> genres, Integer highestNote, Integer lowestNote) {
+    public List<Song> getSongsByKeywordAndGenreAndVocalRange(List<Integer> genres, Integer highestNote, Integer lowestNote, String keyword) {
 
         final int maxNote = (highestNote == -1) ? Integer.MAX_VALUE : highestNote;
         final int minNote = (lowestNote == -1) ? Integer.MIN_VALUE : lowestNote;
@@ -49,6 +49,20 @@ public class SongService {
             // Vocal range filtering
             predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("highestNote"), maxNote));
             predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("lowestNote"), minNote));
+
+            // 키워드 필터링
+            if (keyword != null && !keyword.isEmpty()) {
+                String[] keywords = keyword.split(" ");
+                List<Predicate> keywordPredicates = new ArrayList<>();
+                for (String key : keywords) {
+                    String lowerKeyword = "%" + key.toLowerCase() + "%";
+                    keywordPredicates.add(criteriaBuilder.or(
+                            criteriaBuilder.like(criteriaBuilder.lower(root.get("artist")), lowerKeyword),
+                            criteriaBuilder.like(criteriaBuilder.lower(root.get("songTitle")), lowerKeyword)
+                    ));
+                }
+                predicates.add(criteriaBuilder.and(keywordPredicates.toArray(new Predicate[0])));
+            }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };

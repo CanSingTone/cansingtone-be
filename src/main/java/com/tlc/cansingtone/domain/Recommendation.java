@@ -11,8 +11,8 @@ import lombok.Setter;
 public class Recommendation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recommandation", nullable = false)
-    private Long recommandationId;
+    @Column(name = "recommendation_id", nullable = false)
+    private Long recommendationId;
 
     @Column(name = "song_id", nullable = false)
     private Long songId;
@@ -20,9 +20,9 @@ public class Recommendation {
     @Column(name = "user_id", nullable = false)
     private String userId;
 
-    @Column(name = "recommandation_method", nullable = false)
-    private String recommandationMethod;
+    @Column(name = "recommendation_method", nullable = false)
+    private int recommendationMethod;
 
-    @Column(name = "recommandation_date", nullable = false)
-    private String recommandationDate;
+    @Column(name = "recommendation_date", nullable = false)
+    private String recommendationDate;
 }

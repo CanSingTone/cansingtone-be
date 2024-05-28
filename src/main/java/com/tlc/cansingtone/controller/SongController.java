@@ -36,29 +36,30 @@ public class SongController {
         }
     }
 
-    @Operation(summary = "곡 제목 및 가수 이름으로 곡 검색")
-    @GetMapping("/search")
-    public BaseResponse<List<ResSongDto>> getSongsbyTitleOrArtist(@RequestParam String keyword) {
-        try {
-            List<Song> songs = songService.getSongsbyTitleOrArtist(keyword);
-            // Song을 ResSongDto로 변환하여 리스트로 만듭니다.
-            List<ResSongDto> responseSongs = songs.stream()
-                    .map(ResSongDto::new)
-                    .collect(Collectors.toList());
-            return new BaseResponse<>(responseSongs);
-        } catch (BusinessException e) {
-            return new BaseResponse<>(e.getErrorCode());
-        }
-    }
+//    @Operation(summary = "곡 제목 및 가수 이름으로 곡 검색")
+//    @GetMapping("/search")
+//    public BaseResponse<List<ResSongDto>> getSongsbyTitleOrArtist(@RequestParam String keyword) {
+//        try {
+//            List<Song> songs = songService.getSongsbyTitleOrArtist(keyword);
+//            // Song을 ResSongDto로 변환하여 리스트로 만듭니다.
+//            List<ResSongDto> responseSongs = songs.stream()
+//                    .map(ResSongDto::new)
+//                    .collect(Collectors.toList());
+//            return new BaseResponse<>(responseSongs);
+//        } catch (BusinessException e) {
+//            return new BaseResponse<>(e.getErrorCode());
+//        }
+//    }
 
-    @Operation(summary = "장르 및 음역대로 곡 필터링")
+    @Operation(summary = "키워드 및 장르, 음역대로 곡 검색")
     @GetMapping("/filter")
-    public BaseResponse<List<ResSongDto>> getSongsByGenreAndVocalRange(
+    public BaseResponse<List<ResSongDto>> getSongsByKeywordAndGenreAndVocalRange(
             @RequestParam(name = "genres", required = false) List<Integer> genres,
             @RequestParam(name = "highest_note", required = false, defaultValue = "-1") Integer highestNote,
-            @RequestParam(name = "lowest_note", required = false, defaultValue = "-1") Integer lowestNote) {
+            @RequestParam(name = "lowest_note", required = false, defaultValue = "-1") Integer lowestNote,
+            @RequestParam(name = "keyword", required = false) String keyword) {
         try {
-            List<Song> songs = songService.getSongsByGenreAndVocalRange(genres, highestNote, lowestNote);
+            List<Song> songs = songService.getSongsByKeywordAndGenreAndVocalRange(genres, highestNote, lowestNote, keyword);
             List<ResSongDto> responseSongs = songs.stream()
                     .map(ResSongDto::new)
                     .collect(Collectors.toList());
