@@ -21,7 +21,7 @@ public class Recommendation {
     private String userId;
 
     @Column(name = "recommendation_method", nullable = false)
-    private String recommendationMethod;
+    private int recommendationMethod;
 
     @Column(name = "recommendation_date", nullable = false)
     private String recommendationDate;

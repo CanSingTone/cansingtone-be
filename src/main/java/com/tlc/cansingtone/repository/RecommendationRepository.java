@@ -9,5 +9,5 @@ import java.util.List;
 public interface RecommendationRepository extends JpaRepository<Recommendation, Long> {
     List<Recommendation> findAll();
 
-    List<Recommendation> findByUserId(String userId);
+    List<Recommendation> findByUserIdAndRecommendationMethod(String userId, int recommendationMethod);
 }

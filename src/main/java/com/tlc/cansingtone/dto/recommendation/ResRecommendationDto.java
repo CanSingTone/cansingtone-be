@@ -16,7 +16,7 @@ public class ResRecommendationDto {
     private String userId;
 
     @Schema(description = "추천 방법", example = "1")
-    private String recommendationMethod;
+    private int recommendationMethod;
 
     @Schema(description = "추천 날짜", example = "1")
     private String recommendationDate;

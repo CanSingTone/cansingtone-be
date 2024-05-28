@@ -23,7 +23,7 @@ public class TestController {
         this.testService = testService;
     }
 
-    @Operation(summary = "음성 데이터 전송")
+    @Operation(summary = "음역대 테스트용 음성 데이터 전송")
     @PostMapping
     public BaseResponse<String> sendVoiceData(@RequestParam(name = "user_id") String userId, @RequestParam(name = "voice_data") MultipartFile file) {
         try {

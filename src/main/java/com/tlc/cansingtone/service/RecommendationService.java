@@ -2,9 +2,7 @@ package com.tlc.cansingtone.service;
 
 import com.tlc.cansingtone.domain.Recommendation;
 import com.tlc.cansingtone.domain.Song;
-import com.tlc.cansingtone.domain.SongInPlaylist;
 import com.tlc.cansingtone.dto.recommendation.ResRecommendationDto;
-import com.tlc.cansingtone.dto.song_in_playlist.ResSongInPlaylistDto;
 import com.tlc.cansingtone.repository.RecommendationRepository;
 import com.tlc.cansingtone.repository.SongRepository;
 import com.tlc.cansingtone.exception.BusinessException;
@@ -25,7 +23,7 @@ public class RecommendationService {
         this.songRepository = songRepository;
     }
 
-    public Long createNewRecommendation(Long songId, String userId, String recommendationMethod, String recommendationDate) {
+    public Long createNewRecommendation(Long songId, String userId, int recommendationMethod, String recommendationDate) {
         Recommendation newRecommendation = new Recommendation();
         newRecommendation.setSongId(songId);
         newRecommendation.setUserId(userId);
@@ -36,10 +34,32 @@ public class RecommendationService {
         return savedRecommendation.getRecommendationId();
     }
 
-    public List<ResRecommendationDto> getRecommendationsByUserId(String userId) {
-        // 특정 사용자의 추천 목록 조회
+    public List<Song> getVocalRangeRecommendationsByUserId(String userId, int vocalRangeHigh, int vocalRangeLow) {
+        // 특정 사용자의 음역대 추천 목록 조회
 
-        List<Recommendation> recommendations = recommendationRepository.findByUserId(userId);
+        List<Song> songs = songRepository.findByHighestNoteGreaterThanEqualAndLowestNoteLessThanEqual(vocalRangeHigh, vocalRangeLow);
+        return songs;
+    }
+
+    public List<ResRecommendationDto> getTimbreRecommendationsByUserId(String userId) {
+        // 특정 사용자의 음색 추천 목록 조회
+
+        List<Recommendation> recommendations = recommendationRepository.findByUserIdAndRecommendationMethod(userId, 2);
+        List<ResRecommendationDto> recommendationsWithDetails = new ArrayList<>();
+
+        for (Recommendation recommendation : recommendations) {
+            Song song = songRepository.findById(recommendation.getSongId())
+                    .orElseThrow(() -> new BusinessException(ErrorCode.EMPTY_DATA));
+            recommendationsWithDetails.add(new ResRecommendationDto(recommendation, song));
+        }
+
+        return recommendationsWithDetails;
+    }
+
+    public List<ResRecommendationDto> getCombinedRecommendationsByUserId(String userId) {
+        // 특정 사용자의 음색 추천 목록 조회
+
+        List<Recommendation> recommendations = recommendationRepository.findByUserIdAndRecommendationMethod(userId, 3);
         List<ResRecommendationDto> recommendationsWithDetails = new ArrayList<>();
 
         for (Recommendation recommendation : recommendations) {
