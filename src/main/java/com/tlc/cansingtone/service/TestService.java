@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestService {
 
-    public String sendFileToAIServer(String userId, MultipartFile file) throws IOException {
+    public String sendPitchVoiceDataToAIServer(String userId, MultipartFile file) throws IOException {
 
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -33,7 +33,28 @@ public class TestService {
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity("http://3.36.170.145:5000/upload-mp3", requestEntity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://3.36.170.145:5000/upload-pitch", requestEntity, String.class);
+        return response.getBody();
+    }
+
+    public String sendTimbreVoiceDataToAIServer(String userId, MultipartFile file) throws IOException {
+
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("file", new ByteArrayResource(file.getBytes()) {
+            @Override
+            public String getFilename() {
+                return file.getOriginalFilename();
+            }
+        });
+        body.add("user_id", userId);
+
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity("http://3.36.170.145:5000/upload-timbre", requestEntity, String.class);
         return response.getBody();
     }
 }

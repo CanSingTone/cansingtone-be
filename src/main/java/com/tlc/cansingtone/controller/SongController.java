@@ -52,7 +52,7 @@ public class SongController {
 //    }
 
     @Operation(summary = "키워드 및 장르, 음역대로 곡 검색")
-    @GetMapping("/filter")
+    @GetMapping("/search")
     public BaseResponse<List<ResSongDto>> getSongsByKeywordAndGenreAndVocalRange(
             @RequestParam(name = "genres", required = false) List<Integer> genres,
             @RequestParam(name = "highest_note", required = false, defaultValue = "-1") Integer highestNote,
