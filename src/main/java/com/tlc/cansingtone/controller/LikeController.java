@@ -49,4 +49,24 @@ public class LikeController {
         }
     }
 
+    @Operation(summary = "사용자 ID와 곡 ID로 좋아요 정보 조회")
+    @GetMapping
+    public BaseResponse<ResLikeDto> getLike(@RequestParam(name = "user_id") String userId, @RequestParam(name = "song_id") Long songId) {
+        try {
+            return new BaseResponse<>(likeService.checkLikeByUserIDAndSongId(userId, songId));
+        } catch (BusinessException e) {
+            return new BaseResponse<>(e.getErrorCode());
+        }
+    }
+
+    @Operation(summary = "좋아요 정보 삭제")
+    @DeleteMapping
+    public BaseResponse<Long> deleteLike(@RequestParam(name = "like_id") Long likeId) {
+        try {
+            likeService.deleteLike(likeId);
+            return new BaseResponse<>(likeId);
+        } catch (BusinessException e) {
+            return new BaseResponse<>(e.getErrorCode());
+        }
+    }
 }

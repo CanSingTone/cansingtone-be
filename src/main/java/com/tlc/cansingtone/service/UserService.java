@@ -7,6 +7,7 @@ import com.tlc.cansingtone.exception.BusinessException;
 import com.tlc.cansingtone.exception.ErrorCode;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -58,6 +59,34 @@ public class UserService {
         ResUserDto response = new ResUserDto(user);
         return response;
     }
+
+    @Transactional
+    public User patchUser(String userId, String nickname, Integer ages, Integer pref_genre1, Integer pref_genre2, Integer pref_genre3) {
+        // Find the user by userId
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.EMPTY_DATA));
+
+        // Update user information if the corresponding parameters are not null
+        if (nickname != null) {
+            user.setNickname(nickname);
+        }
+        if (ages != null) {
+            user.setAges(ages);
+        }
+        if (pref_genre1 != null) {
+            user.setPref_genre1(pref_genre1);
+        }
+        if (pref_genre2 != null) {
+            user.setPref_genre2(pref_genre2);
+        }
+        if (pref_genre3 != null) {
+            user.setPref_genre3(pref_genre3);
+        }
+
+        // Save the updated user
+        return userRepository.save(user);
+    }
+
 
     public User patchVocalRange(String userId, int vocalRangeHigh, int vocalRangeLow) {
         User user = userRepository.findByUserId(userId)

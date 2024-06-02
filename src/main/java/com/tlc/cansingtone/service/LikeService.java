@@ -48,4 +48,15 @@ public class LikeService {
         return likesWithDetails;
     }
 
+    public ResLikeDto checkLikeByUserIDAndSongId(String userId, Long songId) {
+        Like like = likeRepository.findByUserIdAndSongId(userId, songId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.EMPTY_DATA));
+
+        return new ResLikeDto(like);
+    }
+
+    public void deleteLike(Long likeId) {
+        likeRepository.deleteById(likeId);
+    }
+
 }

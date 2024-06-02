@@ -45,6 +45,7 @@ public class RecommendationService {
         // 특정 사용자의 음색 추천 목록 조회
 
         List<Recommendation> recommendations = recommendationRepository.findByUserIdAndRecommendationMethod(userId, 2);
+
         List<ResRecommendationDto> recommendationsWithDetails = new ArrayList<>();
 
         for (Recommendation recommendation : recommendations) {

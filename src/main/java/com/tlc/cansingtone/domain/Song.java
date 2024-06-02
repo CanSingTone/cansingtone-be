@@ -40,5 +40,7 @@ public class Song {
 
     @Column(name = "lowest_note", nullable = false)
     private int lowestNote;
-    
+
+    @Column(name = "karaoke_num", nullable = false)
+    private String karaoke_num;
 }

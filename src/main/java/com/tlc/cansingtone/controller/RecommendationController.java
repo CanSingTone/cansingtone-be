@@ -52,8 +52,10 @@ public class RecommendationController {
     @Operation(summary = "특정 사용자의 음색 기반 추천 목록")
     @GetMapping("/{userId}/timbre")
     public BaseResponse<List<ResRecommendationDto>> getTimbreRecommendationsByUserId(@PathVariable String userId) {
+
         try {
             List<ResRecommendationDto> recommendationList = recommendationService.getTimbreRecommendationsByUserId(userId);
+
             return new BaseResponse<>(recommendationList);
         } catch (BusinessException e) {
             return new BaseResponse<>(e.getErrorCode());

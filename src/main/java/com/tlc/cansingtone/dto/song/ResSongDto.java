@@ -53,4 +53,7 @@ public class ResSongDto {
 
     @Schema(description = "노래 최저음", example = "1")
     private int lowestNote;
+
+    @Schema(description = "노래방 번호", example = "1234")
+    private String karaoke_num;
 }

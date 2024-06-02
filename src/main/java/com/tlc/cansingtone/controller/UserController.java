@@ -80,6 +80,24 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "회원 정보 수정")
+    @PatchMapping("/{userId}")
+    public BaseResponse<ResUserDto> patchUser(
+            @PathVariable String userId,
+            @RequestParam(name = "nickname", required = false) String nickname,
+            @RequestParam(name = "ages", required = false) Integer ages,
+            @RequestParam(name = "pref_genre1", required = false) Integer pref_genre1,
+            @RequestParam(name = "pref_genre2", required = false) Integer pref_genre2,
+            @RequestParam(name = "pref_genre3", required = false) Integer pref_genre3) {
+        try {
+            User updatedUser = userService.patchUser(userId, nickname, ages, pref_genre1, pref_genre2, pref_genre3);
+            return new BaseResponse<>(new ResUserDto(updatedUser));
+        } catch (BusinessException e) {
+            return new BaseResponse<>(e.getErrorCode());
+        }
+    }
+
+
     // AI에서 사용하는 API
 
     @Operation(summary = "회원 음역대 정보 등록 및 수정")
