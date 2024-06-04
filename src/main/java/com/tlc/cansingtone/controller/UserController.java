@@ -114,18 +114,18 @@ public class UserController {
         }
     }
 
-    @Operation(summary = "회원 음색 정보 등록 및 수정")
-    @PatchMapping("/{userId}/timbre")
-    public BaseResponse<ResUserDto> updateVocalRange(
-            @PathVariable String userId,
-            @RequestParam(name = "timbre_url") String timbreUrl) {
-        try {
-            User updatedUser = userService.updateTimbre(userId, timbreUrl);
-            return new BaseResponse<>(new ResUserDto(updatedUser));
-        } catch (BusinessException e) {
-            return new BaseResponse<>(e.getErrorCode());
-        }
-    }
+//    @Operation(summary = "회원 음색 정보 등록 및 수정")
+//    @PatchMapping("/{userId}/timbre")
+//    public BaseResponse<ResUserDto> updateVocalRange(
+//            @PathVariable String userId,
+//            @RequestParam(name = "timbre_url") String timbreUrl) {
+//        try {
+//            User updatedUser = userService.updateTimbre(userId, timbreUrl);
+//            return new BaseResponse<>(new ResUserDto(updatedUser));
+//        } catch (BusinessException e) {
+//            return new BaseResponse<>(e.getErrorCode());
+//        }
+//    }
 
 }
 

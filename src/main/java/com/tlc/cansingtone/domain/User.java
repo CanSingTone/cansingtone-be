@@ -38,6 +38,6 @@ public class User {
     @Column(name = "vocal_range_low")
     private int vocalRangeLow;
 
-    @Column(name = "timbre")
-    private String timbre;
+//    @Column(name = "timbre")
+//    private String timbre;
 }

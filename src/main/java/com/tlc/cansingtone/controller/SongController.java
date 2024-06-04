@@ -36,20 +36,6 @@ public class SongController {
         }
     }
 
-//    @Operation(summary = "곡 제목 및 가수 이름으로 곡 검색")
-//    @GetMapping("/search")
-//    public BaseResponse<List<ResSongDto>> getSongsbyTitleOrArtist(@RequestParam String keyword) {
-//        try {
-//            List<Song> songs = songService.getSongsbyTitleOrArtist(keyword);
-//            // Song을 ResSongDto로 변환하여 리스트로 만듭니다.
-//            List<ResSongDto> responseSongs = songs.stream()
-//                    .map(ResSongDto::new)
-//                    .collect(Collectors.toList());
-//            return new BaseResponse<>(responseSongs);
-//        } catch (BusinessException e) {
-//            return new BaseResponse<>(e.getErrorCode());
-//        }
-//    }
 
     @Operation(summary = "키워드 및 장르, 음역대로 곡 검색")
     @GetMapping("/search")

@@ -100,14 +100,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User updateTimbre(String userId, String timbre) {
-        User user = userRepository.findByUserId(userId)
-                .orElseThrow(() -> new BusinessException(ErrorCode.EMPTY_DATA));
-
-        // Update the timbre information
-        user.setTimbre(timbre);
-
-        // Save the updated user
-        return userRepository.save(user);
-    }
+//    public User updateTimbre(String userId, String timbre) {
+//        User user = userRepository.findByUserId(userId)
+//                .orElseThrow(() -> new BusinessException(ErrorCode.EMPTY_DATA));
+//
+//        // Update the timbre information
+//        user.setTimbre(timbre);
+//
+//        // Save the updated user
+//        return userRepository.save(user);
+//    }
 }
