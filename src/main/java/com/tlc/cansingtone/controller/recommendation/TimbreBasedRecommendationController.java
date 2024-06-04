@@ -39,7 +39,7 @@ public class TimbreBasedRecommendationController {
     }
 
     @Operation(summary = "특정 사용자의 음색 기반 추천곡 목록")
-    @GetMapping("/{userId}/timbre")
+    @GetMapping("/{userId}")
     public BaseResponse<List<ResTimbreBasedRecommendationDto>> getTimbreRecommendationsByUserId(@PathVariable String userId) {
 
         try {
