@@ -9,11 +9,18 @@ import com.tlc.cansingtone.repository.SongRepository;
 import com.tlc.cansingtone.exception.BusinessException;
 import com.tlc.cansingtone.exception.ErrorCode;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,6 +45,30 @@ public class TimbreBasedRecommendationService {
 
         TimbreBasedRecommendation savedRecommendation = timbreBasedRecommendationRepository.save(newRecommendation);
         return savedRecommendation.getRecommendationId();
+    }
+
+    public String requestTimbreRecommendation(String userId, Long timbreId) throws IOException {
+        RestTemplate restTemplate = new RestTemplate();
+
+        // 헤더 설정
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        Map<String, Object> body = new HashMap<>();
+        body.put("user_id", userId);
+        body.put("timbre_id", timbreId);
+
+        // 요청 엔티티 설정
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+        // API 서버로 POST 요청 보내기
+        ResponseEntity<String> response = restTemplate.postForEntity(
+                "http://13.209.221.128:5000/recommendation-timbre",
+                requestEntity,
+                String.class
+        );
+
+        return response.getBody();
     }
 
 

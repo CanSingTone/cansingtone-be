@@ -8,10 +8,12 @@ import com.tlc.cansingtone.BaseResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RestController
@@ -34,6 +36,17 @@ public class TimbreBasedRecommendationController {
             return new BaseResponse<>(timbreBasedRecommendationService.createNewRecommendation(songIds, userId, recommendationDate, timbreId));
         } catch (BusinessException e) {
             return new BaseResponse<>(e.getErrorCode());
+        }
+    }
+
+    @Operation(summary = "음색 기반 추천곡 생성 요청")
+    @PostMapping("/request")
+    public BaseResponse<String> requestTimbreRecommendation(@RequestParam(name = "user_id") String userId,
+                                                            @RequestParam(name = "timbre_id") Long timbreId) {
+        try {
+            return new BaseResponse<>(timbreBasedRecommendationService.requestTimbreRecommendation(userId, timbreId));
+        } catch (IOException e) {
+            return new BaseResponse<>(e.getMessage());
         }
     }
 

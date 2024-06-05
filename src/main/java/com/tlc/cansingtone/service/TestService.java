@@ -1,11 +1,15 @@
 package com.tlc.cansingtone.service;
 
+import com.tlc.cansingtone.repository.TimbreRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.*;
 import org.springframework.util.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.*;
+
+import com.tlc.cansingtone.repository.TimbreRepository;
 
 import java.io.*;
 
@@ -15,6 +19,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TestService {
+
+    private final TimbreRepository timbreRepository;
+
+    public TestService(TimbreRepository timbreRepository) {
+        this.timbreRepository = timbreRepository;
+    }
+
 
     public String sendPitchVoiceDataToAIServer(String userId, MultipartFile file) throws IOException {
 
@@ -43,6 +54,9 @@ public class TestService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
+        // 유저의 현재 음색 개수를 조회
+        int timbreCount = timbreRepository.getTimbreCountForUser(userId);
+
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("file", new ByteArrayResource(file.getBytes()) {
             @Override
@@ -51,6 +65,10 @@ public class TestService {
             }
         });
         body.add("user_id", userId);
+
+        // 가져온 음색 개수를 요청 본문에 추가
+        String timbreName = "음색" + (timbreCount + 1);
+        body.add("timbre_name", timbreName);
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 

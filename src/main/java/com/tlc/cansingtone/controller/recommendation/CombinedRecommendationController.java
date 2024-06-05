@@ -8,6 +8,7 @@ import com.tlc.cansingtone.BaseResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,7 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
 @RestController
-@RequestMapping(value = "/combine-recommendations", produces = "application/json;charset=utf8")
+@RequestMapping(value = "/combined-recommendations", produces = "application/json;charset=utf8")
 @Tag(name = "종합 추천 API")
 public class CombinedRecommendationController {
     private final CombinedRecommendationService combinedRecommendationService;
@@ -33,6 +34,16 @@ public class CombinedRecommendationController {
             return new BaseResponse<>(combinedRecommendationService.createNewRecommendation(songIds, userId, recommendationDate));
         } catch (BusinessException e) {
             return new BaseResponse<>(e.getErrorCode());
+        }
+    }
+
+    @Operation(summary = "음역대 기반 추천곡 생성 요청")
+    @PostMapping("/request")
+    public BaseResponse<String> requestTimbreRecommendation(@RequestParam(name = "user_id") String userId) {
+        try {
+            return new BaseResponse<>(combinedRecommendationService.requestCombinedRecommendation(userId));
+        } catch (IOException e) {
+            return new BaseResponse<>(e.getMessage());
         }
     }
 

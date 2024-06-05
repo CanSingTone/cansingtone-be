@@ -7,7 +7,7 @@ import com.tlc.cansingtone.exception.BusinessException;
 import com.tlc.cansingtone.exception.ErrorCode;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -20,8 +20,9 @@ public class TimbreService {
         this.timbreRepository = timbreRepository;
     }
 
-    public ResTimbreDto createTimbre(String timbreUrl, String userId) {
+    public ResTimbreDto createTimbre(String timbreName, String timbreUrl, String userId) {
         Timbre newTimbre = new Timbre();
+        newTimbre.setTimbreName(timbreName);
         newTimbre.setTimbreUrl(timbreUrl);
         newTimbre.setUserId(userId);
 
