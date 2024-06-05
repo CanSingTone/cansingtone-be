@@ -15,7 +15,6 @@ public enum ErrorCode {
     INTERNAL_SERVER_ERROR(false, 2003, "문제가 발생했습니다."),
     FAILED_TO_SEND_EMAIL(false, 2004, "이메일 발송에 실패했습니다"),
     EMPTY_DATA(false, 2005, "비어 있는 값을 입력했습니다."),
-    //FAILED_TO_CREATE_PDF(false, 2006, "PDF 생성에 실패했습니다."),
 
     /*유저 3000*/
     ACCOUNT_NOT_FOUND(false, 3001, "사용자를 찾을 수 없습니다."),
@@ -32,10 +31,7 @@ public enum ErrorCode {
     DATABASE_ERROR(false, 4000, "DB에 문제가 발생했습니다."),
     NO_EXIST_USER(false, 4001, "없는 유저입니다."),
     NO_EXIST_SONGCODE(false, 4002, "없는 곡입니다."),
-    //NO_EXIST_BOARD(false, 4004, "해당 게시물이 존재하지 않습니다."),
     TIMEOUT_EXCEPTION(false, 4005, "시간이 오래 소요됩니다"),
-    //INVALID_PET_SIZE(false, 4011, "petvalue값에 문제가 있습니다."),
-    //INVALID_PERCENTAGE(false, 4012, "백분율이 유효한 범위에 없습니다."),
     DUPLICATE_LIKE(false, 4006, "이미 좋아요한 노래입니다."),
     DUPLICATE_SONG_IN_PLAYLIST(false, 4007, "이미 재생목록에 추가된 노래입니다.");
 
