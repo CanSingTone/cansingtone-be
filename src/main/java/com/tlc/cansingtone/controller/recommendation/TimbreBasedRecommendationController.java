@@ -1,6 +1,5 @@
 package com.tlc.cansingtone.controller.recommendation;
 
-import com.tlc.cansingtone.dto.recommendation.ResRecommendationDto;
 import com.tlc.cansingtone.dto.recommendation.ResTimbreBasedRecommendationDto;
 import com.tlc.cansingtone.service.recommendation.TimbreBasedRecommendationService;
 import com.tlc.cansingtone.exception.BusinessException;

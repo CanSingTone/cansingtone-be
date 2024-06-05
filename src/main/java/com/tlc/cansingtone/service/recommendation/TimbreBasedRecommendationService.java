@@ -3,7 +3,6 @@ package com.tlc.cansingtone.service.recommendation;
 
 import com.tlc.cansingtone.domain.recommendation.TimbreBasedRecommendation;
 import com.tlc.cansingtone.domain.Song;
-import com.tlc.cansingtone.dto.recommendation.ResRecommendationDto;
 import com.tlc.cansingtone.dto.recommendation.ResTimbreBasedRecommendationDto;
 import com.tlc.cansingtone.repository.recommendation.TimbreBasedRecommendationRepository;
 import com.tlc.cansingtone.repository.SongRepository;
