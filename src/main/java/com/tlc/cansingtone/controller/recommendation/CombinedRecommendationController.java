@@ -26,11 +26,11 @@ public class CombinedRecommendationController {
 
     @Operation(summary = "추천곡 등록")
     @PostMapping
-    public BaseResponse<Long> createNewRecommendation(@RequestParam(name = "song_id") Long songId,
+    public BaseResponse<Long> createNewRecommendation(@RequestParam(name = "song_ids") List<Long> songIds,
                                                       @RequestParam(name = "user_id") String userId,
                                                       @RequestParam(name = "recommendation_date") String recommendationDate) {
         try {
-            return new BaseResponse<>(combinedRecommendationService.createNewRecommendation(songId, userId, recommendationDate));
+            return new BaseResponse<>(combinedRecommendationService.createNewRecommendation(songIds, userId, recommendationDate));
         } catch (BusinessException e) {
             return new BaseResponse<>(e.getErrorCode());
         }
@@ -38,9 +38,9 @@ public class CombinedRecommendationController {
 
     @Operation(summary = "특정 사용자의 종합 추천 목록")
     @GetMapping("/{userId}")
-    public BaseResponse<List<ResCombinedRecommendationDto>> getVocalRangeRecommendationsByUserId(@PathVariable String userId) {
+    public BaseResponse<List<ResCombinedRecommendationDto>> getCombinedRecommendationsByUserId(@PathVariable String userId) {
         try {
-            List<ResCombinedRecommendationDto> recommendationList = combinedRecommendationService.getVocalRangeRecommendationsByUserId(userId);
+            List<ResCombinedRecommendationDto> recommendationList = combinedRecommendationService.getCombinedRecommendationsByUserId(userId);
             return new BaseResponse<>(recommendationList);
         } catch (BusinessException e) {
             return new BaseResponse<>(e.getErrorCode());

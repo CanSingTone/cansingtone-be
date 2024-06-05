@@ -14,12 +14,13 @@ public class CombinedRecommendation {
     @Column(name = "recommendation_id", nullable = false)
     private Long recommendationId;
 
-    @Column(name = "song_id", nullable = false)
-    private Long songId;
-
     @Column(name = "user_id", nullable = false)
     private String userId;
 
     @Column(name = "recommendation_date", nullable = false)
     private String recommendationDate;
+
+    @Column(name = "song_ids", nullable = false)
+    private String songIds;
+
 }
