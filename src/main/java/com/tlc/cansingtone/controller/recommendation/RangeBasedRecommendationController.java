@@ -24,14 +24,14 @@ public class RangeBasedRecommendationController {
         this.rangeBasedRecommendationService = rangeBasedRecommendationService;
     }
 
-    @Operation(summary = "추천곡 등록")
+    @Operation(summary = "음역대 기반 추천곡 생성")
     @PostMapping
-    public BaseResponse<Long> createNewRecommendation(@RequestParam(name = "song_id") Long songId,
-                                                      @RequestParam(name = "user_id") String userId,
-
-                                                      @RequestParam(name = "recommendation_date") String recommendationDate) {
+    public BaseResponse<Long> createNewRecommendation(
+            @RequestParam(name = "user_id") String userId,
+            @RequestParam(name = "vocal_range_high") int vocalRangeHigh, @RequestParam(name = "vocal_range_low") int vocalRangeLow
+    ) {
         try {
-            return new BaseResponse<>(rangeBasedRecommendationService.createNewRecommendation(songId, userId, recommendationDate));
+            return new BaseResponse<>(rangeBasedRecommendationService.createNewRecommendation(userId, vocalRangeHigh, vocalRangeLow));
         } catch (BusinessException e) {
             return new BaseResponse<>(e.getErrorCode());
         }
@@ -39,9 +39,9 @@ public class RangeBasedRecommendationController {
 
     @Operation(summary = "특정 사용자의 음역대 기반 추천 목록")
     @GetMapping("/{userId}")
-    public BaseResponse<List<ResRangeBasedRecommendationDto>> getVocalRangeRecommendationsByUserId(@PathVariable String userId, @RequestParam(name = "vocal_range_high") int vocalRangeHigh, @RequestParam(name = "vocal_range_low") int vocalRangeLow) {
+    public BaseResponse<List<ResRangeBasedRecommendationDto>> getVocalRangeRecommendationsByUserId(@PathVariable String userId) {
         try {
-            List<ResRangeBasedRecommendationDto> recommendationList = rangeBasedRecommendationService.getVocalRangeRecommendationsByUserId(userId, vocalRangeHigh, vocalRangeLow);
+            List<ResRangeBasedRecommendationDto> recommendationList = rangeBasedRecommendationService.getVocalRangeRecommendationsByUserId(userId);
             return new BaseResponse<>(recommendationList);
         } catch (BusinessException e) {
             return new BaseResponse<>(e.getErrorCode());

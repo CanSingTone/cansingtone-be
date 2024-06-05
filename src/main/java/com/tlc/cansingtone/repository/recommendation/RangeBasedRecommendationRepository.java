@@ -1,5 +1,6 @@
 package com.tlc.cansingtone.repository.recommendation;
 
+import com.tlc.cansingtone.domain.Song;
 import com.tlc.cansingtone.domain.recommendation.RangeBasedRecommendation;
 import org.springframework.data.jpa.repository.JpaRepository;
 

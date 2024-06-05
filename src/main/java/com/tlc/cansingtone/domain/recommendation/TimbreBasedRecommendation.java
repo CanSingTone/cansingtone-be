@@ -14,9 +14,6 @@ public class TimbreBasedRecommendation {
     @Column(name = "recommendation_id", nullable = false)
     private Long recommendationId;
 
-    @Column(name = "song_id", nullable = false)
-    private Long songId;
-
     @Column(name = "user_id", nullable = false)
     private String userId;
 
@@ -25,4 +22,8 @@ public class TimbreBasedRecommendation {
 
     @Column(name = "timbre_id", nullable = false)
     private Long timbreId;
+
+    @Column(name = "song_ids", nullable = false)
+    private String songIds;
+
 }

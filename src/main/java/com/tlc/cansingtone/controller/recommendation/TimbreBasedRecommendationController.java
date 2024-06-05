@@ -27,12 +27,12 @@ public class TimbreBasedRecommendationController {
 
     @Operation(summary = "음색 기반 추천곡 등록")
     @PostMapping
-    public BaseResponse<Long> createNewRecommendation(@RequestParam(name = "song_id") Long songId,
+    public BaseResponse<Long> createNewRecommendation(@RequestParam(name = "song_ids") List<Long> songIds,
                                                       @RequestParam(name = "user_id") String userId,
                                                       @RequestParam(name = "recommendation_date") String recommendationDate,
                                                       @RequestParam(name = "timbre_id") Long timbreId) {
         try {
-            return new BaseResponse<>(timbreBasedRecommendationService.createNewRecommendation(songId, userId, recommendationDate, timbreId));
+            return new BaseResponse<>(timbreBasedRecommendationService.createNewRecommendation(songIds, userId, recommendationDate, timbreId));
         } catch (BusinessException e) {
             return new BaseResponse<>(e.getErrorCode());
         }
