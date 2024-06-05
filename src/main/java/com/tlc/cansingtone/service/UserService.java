@@ -60,6 +60,29 @@ public class UserService {
         return response;
     }
 
+    public List<User> findUsersWithSimilarVocalRange(String userId, int vocalRangeHigh, int vocalRangeLow) {
+        // 사용자의 음역대 범위를 정의합니다.
+        int vocalRangeThreshold = 2; // 음역대의 차이가 2 이내인 경우 유사한 음역대로 간주
+
+
+        int currentUserVocalRangeHigh = vocalRangeHigh;
+        int currentUserVocalRangeLow = vocalRangeLow;
+
+        // 유사한 음역대를 가진 사용자를 검색합니다.
+        List<User> similarUsers = userRepository.findUsersByVocalRange(
+                currentUserVocalRangeHigh - vocalRangeThreshold,
+                currentUserVocalRangeHigh + vocalRangeThreshold,
+                currentUserVocalRangeLow - vocalRangeThreshold,
+                currentUserVocalRangeLow + vocalRangeThreshold
+        );
+
+        // 자기 자신을 제외합니다.
+        similarUsers.removeIf(user -> user.getUserId().equals(userId));
+
+        return similarUsers;
+    }
+
+
     @Transactional
     public User patchUser(String userId, String nickname, Integer ages, Integer pref_genre1, Integer pref_genre2, Integer pref_genre3) {
         // Find the user by userId

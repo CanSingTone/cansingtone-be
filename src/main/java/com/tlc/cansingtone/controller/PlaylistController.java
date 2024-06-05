@@ -66,6 +66,22 @@ public class PlaylistController {
         }
     }
 
+    @Operation(summary = "나와 음역대가 비슷한 사용자의 플레이리스트 목록")
+    @GetMapping("/similar-vocal-range")
+    public BaseResponse<List<ResPlaylistDto>> getPlaylistsBySimilarVocalRange(@RequestParam(name = "user_id") String userId,
+                                                                              @RequestParam(name = "vocal_range_high") int vocalRangeHigh,
+                                                                              @RequestParam(name = "vocal_range_low") int vocalRangeLow) {
+        try {
+            List<Playlist> playlists = playlistService.getPlaylistsBySimilarVocalRange(userId, vocalRangeHigh, vocalRangeLow);
+            List<ResPlaylistDto> playlistList = playlists.stream()
+                    .map(ResPlaylistDto::new)
+                    .collect(Collectors.toList());
+            return new BaseResponse<>(playlistList);
+        } catch (BusinessException e) {
+            return new BaseResponse<>(e.getErrorCode());
+        }
+    }
+
 
     @Operation(summary = "플레이리스트 공개 여부 수정")
     @PatchMapping("/{playlistId}/is-public")
