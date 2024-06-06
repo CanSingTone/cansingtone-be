@@ -20,11 +20,15 @@ public class TimbreService {
         this.timbreRepository = timbreRepository;
     }
 
-    public ResTimbreDto createTimbre(String timbreName, String timbreUrl, String userId) {
+    public ResTimbreDto createTimbre(String timbreUrl, String userId) {
         Timbre newTimbre = new Timbre();
-        newTimbre.setTimbreName(timbreName);
         newTimbre.setTimbreUrl(timbreUrl);
         newTimbre.setUserId(userId);
+
+        // 유저의 현재 음색 개수를 조회
+        int timbreCount = timbreRepository.getTimbreCountForUser(userId);
+        String timbreName = "음색" + (timbreCount + 1);
+        newTimbre.setTimbreName(timbreName);
 
         Timbre savedTimbre = timbreRepository.save(newTimbre);
         return new ResTimbreDto(savedTimbre);

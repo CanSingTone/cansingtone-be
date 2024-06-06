@@ -29,11 +29,10 @@ public class TimbreController {
     @Operation(summary = "음색 정보 등록")
     @PostMapping
     public BaseResponse<ResTimbreDto> createTimbre(
-            @RequestParam(name = "timbre_name") String timbreName,
             @RequestParam(name = "timbre_url") String timbreUrl,
             @RequestParam(name = "user_id") String userId) {
         try {
-            return new BaseResponse<>(timbreService.createTimbre(timbreName, timbreUrl, userId));
+            return new BaseResponse<>(timbreService.createTimbre(timbreUrl, userId));
         } catch (BusinessException e) {
             return new BaseResponse<>(e.getErrorCode());
         }
