@@ -12,6 +12,6 @@ public interface SongRepository extends JpaRepository<Song, Long>, JpaSpecificat
 
     Optional<Song> findBySongId(Long songId);
 
-    List<Song> findByHighestNoteGreaterThanEqualAndLowestNoteLessThanEqual(int highestNote, int lowestNote);
+    List<Song> findByHighestNoteLessThanEqualAndLowestNoteGreaterThanEqual(int highestNote, int lowestNote);
 
 }

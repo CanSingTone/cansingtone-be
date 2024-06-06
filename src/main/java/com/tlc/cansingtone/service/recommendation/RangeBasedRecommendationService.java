@@ -29,7 +29,7 @@ public class RangeBasedRecommendationService {
     }
 
     public Long createNewRecommendation(String userId, int vocalRangeHigh, int vocalRangeLow) {
-        List<Song> songsInRange = songRepository.findByHighestNoteGreaterThanEqualAndLowestNoteLessThanEqual(vocalRangeHigh, vocalRangeLow);
+        List<Song> songsInRange = songRepository.findByHighestNoteLessThanEqualAndLowestNoteGreaterThanEqual(vocalRangeHigh, vocalRangeLow);
         Collections.shuffle(songsInRange);
         List<Long> recommendedSongIds = songsInRange.stream().limit(10).map(Song::getSongId).collect(Collectors.toList());
 
