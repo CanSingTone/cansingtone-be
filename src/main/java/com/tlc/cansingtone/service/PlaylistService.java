@@ -77,4 +77,8 @@ public class PlaylistService {
         return playlistRepository.save(playlist);
     }
 
+    public void deletePlaylist(Long playlistId) {
+        playlistRepository.deleteById(playlistId);
+    }
+
 }

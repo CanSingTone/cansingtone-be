@@ -95,13 +95,14 @@ public class PlaylistController {
         }
     }
 
-//    @Operation(summary = "플레이리스트 정보 조회")
-//    @GetMapping("/{playlistId}")
-//    public BaseResponse<PlaylistResponseDto> getPlaylist(@PathVariable Long playlistId) {
-//        try {
-//            return new BaseResponse<>(playlistService.getPlaylistOne(playlistId));
-//        } catch (BusinessException e) {
-//            return new BaseResponse<>(e.getErrorCode());
-//        }
-//    }
+    @Operation(summary = "플레이리스트 삭제")
+    @DeleteMapping("/{playlistId}")
+    public BaseResponse<Long> deletePlaylist(@PathVariable Long playlistId) {
+        try {
+            playlistService.deletePlaylist(playlistId);
+            return new BaseResponse<>(playlistId);
+        } catch (BusinessException e) {
+            return new BaseResponse<>(e.getErrorCode());
+        }
+    }
 }

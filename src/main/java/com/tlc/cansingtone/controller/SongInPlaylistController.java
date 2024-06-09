@@ -49,7 +49,7 @@ public class SongInPlaylistController {
         }
     }
 
-    @Operation(summary = "플레이리스트에 곡 삭제")
+    @Operation(summary = "플레이리스트에서 곡 삭제")
     @DeleteMapping
     public BaseResponse<Long> deleteSongFromPlaylist(@RequestParam(name = "song_in_playlist_id") Long songInPlaylistId) {
         try {
