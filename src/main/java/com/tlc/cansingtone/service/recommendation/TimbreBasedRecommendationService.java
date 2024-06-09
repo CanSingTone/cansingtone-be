@@ -72,9 +72,9 @@ public class TimbreBasedRecommendationService {
     }
 
 
-    public List<ResTimbreBasedRecommendationDto> getTimbreRecommendationsByUserId(String userId) {
+    public List<ResTimbreBasedRecommendationDto> getTimbreRecommendationsByUserIdAndTimbreId(String userId, Long timbreId) {
         // 특정 사용자의 음색 추천 목록 조회
-        List<TimbreBasedRecommendation> recommendations = timbreBasedRecommendationRepository.findByUserId(userId);
+        List<TimbreBasedRecommendation> recommendations = timbreBasedRecommendationRepository.findByUserIdAndTimbreIdOrderByRecommendationDateDesc(userId, timbreId);
 
         List<ResTimbreBasedRecommendationDto> recommendationsWithDetails = new ArrayList<>();
 

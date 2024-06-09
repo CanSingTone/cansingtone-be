@@ -50,12 +50,12 @@ public class TimbreBasedRecommendationController {
         }
     }
 
-    @Operation(summary = "특정 사용자의 음색 기반 추천곡 목록")
+    @Operation(summary = "특정 사용자의 특정 음색 기반 추천곡 목록")
     @GetMapping("/{userId}")
-    public BaseResponse<List<ResTimbreBasedRecommendationDto>> getTimbreRecommendationsByUserId(@PathVariable String userId) {
+    public BaseResponse<List<ResTimbreBasedRecommendationDto>> getTimbreRecommendationsByUserId(@PathVariable String userId, @RequestParam(name = "timbre_id") Long timbreId) {
 
         try {
-            List<ResTimbreBasedRecommendationDto> recommendationList = timbreBasedRecommendationService.getTimbreRecommendationsByUserId(userId);
+            List<ResTimbreBasedRecommendationDto> recommendationList = timbreBasedRecommendationService.getTimbreRecommendationsByUserIdAndTimbreId(userId, timbreId);
 
             return new BaseResponse<>(recommendationList);
         } catch (BusinessException e) {

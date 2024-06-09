@@ -12,6 +12,8 @@ import com.tlc.cansingtone.exception.ErrorCode;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,7 +36,7 @@ public class RangeBasedRecommendationService {
         if (songsInRange == null || songsInRange.isEmpty()) {
             throw new BusinessException(ErrorCode.NO_EXIST_SONG_IN_RANGE);
         }
-        
+
         Collections.shuffle(songsInRange);
         List<Long> recommendedSongIds = songsInRange.stream().limit(10).map(Song::getSongId).collect(Collectors.toList());
 
@@ -43,7 +45,12 @@ public class RangeBasedRecommendationService {
 
         RangeBasedRecommendation recommendation = new RangeBasedRecommendation();
         recommendation.setUserId(userId);
-        recommendation.setRecommendationDate(LocalDate.now().toString());
+
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String formattedDateTime = now.format(formatter);
+        recommendation.setRecommendationDate(formattedDateTime);
+
         recommendation.setSongIds(songIdsAsString);
 
         RangeBasedRecommendation savedRecommendation = rangeBasedRecommendationRepository.save(recommendation);
@@ -52,7 +59,7 @@ public class RangeBasedRecommendationService {
 
     public List<ResRangeBasedRecommendationDto> getVocalRangeRecommendationsByUserId(String userId) {
         // 특정 사용자의 음역대 추천 목록 조회
-        List<RangeBasedRecommendation> recommendations = rangeBasedRecommendationRepository.findByUserId(userId);
+        List<RangeBasedRecommendation> recommendations = rangeBasedRecommendationRepository.findByUserIdOrderByRecommendationDateDesc(userId);
         List<ResRangeBasedRecommendationDto> recommendationsWithDetails = new ArrayList<>();
 
         for (RangeBasedRecommendation recommendation : recommendations) {

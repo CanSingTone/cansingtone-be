@@ -1,10 +1,13 @@
 package com.tlc.cansingtone.domain.chart;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Entity
+@Table(name = "personalized_chart")
+@Getter
+@Setter
 public class PersonalizedChart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

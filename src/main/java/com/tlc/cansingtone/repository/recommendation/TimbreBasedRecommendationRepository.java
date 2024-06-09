@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TimbreBasedRecommendationRepository extends JpaRepository<TimbreBasedRecommendation, Long> {
-    List<TimbreBasedRecommendation> findByUserId(String userId);
+    List<TimbreBasedRecommendation> findByUserIdAndTimbreIdOrderByRecommendationDateDesc(String userId, Long timbreId);
 }
