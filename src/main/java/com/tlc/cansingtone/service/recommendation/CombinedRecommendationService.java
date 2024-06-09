@@ -68,7 +68,7 @@ public class CombinedRecommendationService {
 
     public List<ResCombinedRecommendationDto> getCombinedRecommendationsByUserId(String userId) {
         // 특정 사용자의 종합 추천 목록 조회
-        List<CombinedRecommendation> recommendations = combinedRecommendationRepository.findByUserId(userId);
+        List<CombinedRecommendation> recommendations = combinedRecommendationRepository.findByUserIdOrderByRecommendationDateDesc(userId);
 
         List<ResCombinedRecommendationDto> recommendationsWithDetails = new ArrayList<>();
 

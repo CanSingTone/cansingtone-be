@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CombinedRecommendationRepository extends JpaRepository<CombinedRecommendation, Long> {
-    List<CombinedRecommendation> findByUserId(String userId);
+    List<CombinedRecommendation> findByUserIdOrderByRecommendationDateDesc(String userId);
 }
