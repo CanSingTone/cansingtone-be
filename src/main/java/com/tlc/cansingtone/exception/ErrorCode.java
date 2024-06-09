@@ -31,6 +31,7 @@ public enum ErrorCode {
     DATABASE_ERROR(false, 4000, "DB에 문제가 발생했습니다."),
     NO_EXIST_USER(false, 4001, "없는 유저입니다."),
     NO_EXIST_SONGCODE(false, 4002, "없는 곡입니다."),
+    NO_EXIST_SONG_IN_RANGE(false, 4002, "음역대에 맞는 노래가 없습니다."),
     TIMEOUT_EXCEPTION(false, 4005, "시간이 오래 소요됩니다"),
     DUPLICATE_LIKE(false, 4006, "이미 좋아요한 노래입니다."),
     DUPLICATE_SONG_IN_PLAYLIST(false, 4007, "이미 재생목록에 추가된 노래입니다.");

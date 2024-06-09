@@ -30,6 +30,11 @@ public class RangeBasedRecommendationService {
 
     public Long createNewRecommendation(String userId, int vocalRangeHigh, int vocalRangeLow) {
         List<Song> songsInRange = songRepository.findByHighestNoteLessThanEqualAndLowestNoteGreaterThanEqual(vocalRangeHigh, vocalRangeLow);
+
+        if (songsInRange == null || songsInRange.isEmpty()) {
+            throw new BusinessException(ErrorCode.NO_EXIST_SONG_IN_RANGE);
+        }
+        
         Collections.shuffle(songsInRange);
         List<Long> recommendedSongIds = songsInRange.stream().limit(10).map(Song::getSongId).collect(Collectors.toList());
 
