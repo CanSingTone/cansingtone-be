@@ -47,7 +47,7 @@ public class RangeBasedRecommendationService {
         recommendation.setUserId(userId);
 
         LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDateTime = now.format(formatter);
         recommendation.setRecommendationDate(formattedDateTime);
 
