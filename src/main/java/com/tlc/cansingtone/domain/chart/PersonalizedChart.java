@@ -49,4 +49,7 @@ public class PersonalizedChart {
 
     @Column(name = "prefer_gender", nullable = false)
     private int preferGender;
+
+    @Column(name = "ranking")
+    private int ranking;
 }

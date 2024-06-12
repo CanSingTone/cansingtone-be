@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface KaraokeTopChartRepository extends JpaRepository<KaraokeTopChart, Long> {
-    List<KaraokeTopChart> findAll();
+    List<KaraokeTopChart> findAllByOrderByRankingAsc();
 
     Optional<KaraokeTopChart> findBySongId(Long songId);
 }

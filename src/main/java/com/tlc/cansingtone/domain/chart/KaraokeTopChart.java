@@ -43,4 +43,7 @@ public class KaraokeTopChart {
 
     @Column(name = "karaoke_num", nullable = false)
     private String karaoke_num;
+
+    @Column(name = "ranking")
+    private int ranking;
 }

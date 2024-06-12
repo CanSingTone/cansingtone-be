@@ -23,7 +23,7 @@ public class KaraokeTopChartService {
     }
 
     public List<KaraokeTopChart> getKaraokeTopChart() {
-        List<KaraokeTopChart> karaokeTopChart = karaokeTopChartRepository.findAll();
+        List<KaraokeTopChart> karaokeTopChart = karaokeTopChartRepository.findAllByOrderByRankingAsc();
         if (karaokeTopChart == null || karaokeTopChart.isEmpty()) {
             throw new BusinessException(ErrorCode.EMPTY_DATA);
         }
