@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,10 +49,11 @@ public class RangeBasedRecommendationService {
         recommendation.setUserId(userId);
 
         LocalDateTime now = LocalDateTime.now();
+        ZonedDateTime koreaTime = now.atZone(ZoneId.of("Asia/Seoul"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String formattedDateTime = now.format(formatter);
+        String formattedDateTime = koreaTime.format(formatter);
         recommendation.setRecommendationDate(formattedDateTime);
-
+        
         recommendation.setSongIds(songIdsAsString);
 
         RangeBasedRecommendation savedRecommendation = rangeBasedRecommendationRepository.save(recommendation);

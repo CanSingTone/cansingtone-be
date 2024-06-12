@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
 @RestController
-@RequestMapping(value = "/songs", produces = "application/json;charset=utf8")
+@RequestMapping(value = "/charts", produces = "application/json;charset=utf8")
 @Tag(name = "나이 및 성별 선호 차트 API")
 public class PersonalizedChartController {
     private final PersonalizedChartService personalizedChartService;

@@ -37,7 +37,7 @@ public class CombinedRecommendationController {
         }
     }
 
-    @Operation(summary = "음역대 기반 추천곡 생성 요청")
+    @Operation(summary = "종합 추천곡 생성 요청")
     @PostMapping("/request")
     public BaseResponse<String> requestTimbreRecommendation(@RequestParam(name = "user_id") String userId) {
         try {

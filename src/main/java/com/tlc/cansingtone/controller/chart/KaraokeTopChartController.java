@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @Controller
 @RestController
-@RequestMapping(value = "/songs", produces = "application/json;charset=utf8")
+@RequestMapping(value = "/charts", produces = "application/json;charset=utf8")
 @Tag(name = "노래방 TOP API")
 public class KaraokeTopChartController {
     private final KaraokeTopChartService karaokeTopChartService;
