@@ -53,7 +53,7 @@ public class RangeBasedRecommendationService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedDateTime = koreaTime.format(formatter);
         recommendation.setRecommendationDate(formattedDateTime);
-        
+
         recommendation.setSongIds(songIdsAsString);
 
         RangeBasedRecommendation savedRecommendation = rangeBasedRecommendationRepository.save(recommendation);
@@ -77,7 +77,6 @@ public class RangeBasedRecommendationService {
                 recommendationsWithDetails.add(new ResRangeBasedRecommendationDto(recommendation, song));
             }
         }
-
         return recommendationsWithDetails;
     }
 }
