@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PersonalizedChartRepository extends JpaRepository<PersonalizedChart, Long> {
-    List<PersonalizedChart> findByPreferAgeAndPreferGender(int age, int gender);
+    List<PersonalizedChart> findByPreferAgeAndPreferGenderOrderByRankingAsc(int age, int gender);
 
 }
 

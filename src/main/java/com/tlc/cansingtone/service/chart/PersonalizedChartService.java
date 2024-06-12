@@ -22,6 +22,6 @@ public class PersonalizedChartService {
     }
 
     public List<PersonalizedChart> getPersonalizedChart(int age, int gender) {
-        return personalizedChartRepository.findByPreferAgeAndPreferGender(age, gender);
+        return personalizedChartRepository.findByPreferAgeAndPreferGenderOrderByRankingAsc(age, gender);
     }
 }
