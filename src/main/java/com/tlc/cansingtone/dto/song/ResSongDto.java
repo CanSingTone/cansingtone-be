@@ -22,6 +22,7 @@ public class ResSongDto {
         this.mrVidUrl = song.getMrVidUrl();
         this.highestNote = song.getHighestNote();
         this.lowestNote = song.getLowestNote();
+        this.karaoke_num = song.getKaraoke_num();
     }
 
     @Schema(description = "노래ID", example = "1")
