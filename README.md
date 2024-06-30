@@ -23,7 +23,7 @@
 | :------------: | :----------: | :-----------: | 
 | <img src="https://avatars.githubusercontent.com/u/102119414?v=4" height=150 width=150> | <img src="https://avatars.githubusercontent.com/u/33713817?v=4" height=150 width=150> | <img src="https://avatars.githubusercontent.com/u/110683103?v=4" height=150 width=150> |
 | [@ysshwan147](https://github.com/ysshwan147) | [@CHICHIT](https://github.com/CHICHIT) | [@devJS00](https://github.com/devJS00) |
-| AI | FE | BE, DB, DESIGN |
+| AI | FE | BE, DB, Design |
 
 <br>
 
