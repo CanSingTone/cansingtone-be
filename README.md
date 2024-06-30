@@ -3,8 +3,8 @@
 <div align="center">
 <img width="200" alt="image" src="https://github.com/devJS00/cansingtone-be/assets/110683103/7b2fa1fd-67a8-4ead-81e2-e848d62fe669">
 </div>
-<br>
 
+<br>
 
 ## 👩🏻‍💻 프로젝트 소개
 **사용자의 음색과 음역대를 분석하여 부르기 좋은 노래를 추천해주는 앱 서비스**
@@ -21,15 +21,14 @@
 
 | 양석환 | 이의섭 | 이지수 |                   
 | :------------: | :----------: | :-----------: | 
-|    <img src="https://avatars.githubusercontent.com/u/102119414?v=4" height=150 width=150>   | <img src="https://avatars.githubusercontent.com/u/33713817?v=4" height=150 width=150> |<img src="https://avatars.githubusercontent.com/u/110683103?v=4" height=150 width=150>|
-|   [@ysshwan147](https://github.com/ysshwan147)   |    [@CHICHIT](https://github.com/CHICHIT)  | [@devJS00](https://github.com/devJS00)  |
+| <img src="https://avatars.githubusercontent.com/u/102119414?v=4" height=150 width=150> | <img src="https://avatars.githubusercontent.com/u/33713817?v=4" height=150 width=150> | <img src="https://avatars.githubusercontent.com/u/110683103?v=4" height=150 width=150> |
+| [@ysshwan147](https://github.com/ysshwan147) | [@CHICHIT](https://github.com/CHICHIT) | [@devJS00](https://github.com/devJS00) |
 | AI | FE | BE, DB |
 
 <br>
 
 ## 🛠️ 기술 스택
-**BE**
-
+### BE
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
@@ -37,21 +36,18 @@
 ![Swagger](https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white)
 
 
-**FE**
-
+### FE
 ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)
 ![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white)
 ![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white)
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 
 
-**AI**
-
+### AI
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=for-the-badge&logo=TensorFlow&logoColor=white)
 
 
-**Collaboration**
-
+### Collaboration
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white)
 
@@ -59,6 +55,10 @@
 
 ## 👷 시스템 아키텍처
 <img width="500" alt="image" src="https://github.com/devJS00/cansingtone-be/assets/110683103/3df93c9c-517d-4cb7-9ea1-4399dee4efa3">
+
+
+## 💾 DB 구조
+<img width="700" alt="image" src="https://github.com/devJS00/cansingtone-be/assets/110683103/a83e0e1b-6817-43f8-ab43-bebd13797260">
 
 <br>
 
