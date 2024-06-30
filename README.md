@@ -11,7 +11,7 @@
 
 > CAU 2024-1 캡스톤디자인 프로젝트
 > 
-> 개발 기간 : 2024.3.7 ~ 2024.6.14
+> 진행 기간 : 2024.3.7 ~ 2024.6.14
 > 
 > 사용자 매뉴얼 : [CanSingTone_manual.pdf](https://github.com/user-attachments/files/16043557/CanSingTone_manual.pdf)
 
