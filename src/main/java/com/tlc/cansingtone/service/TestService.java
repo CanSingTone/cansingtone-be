@@ -31,7 +31,7 @@ public class TestService {
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity("http://13.209.221.128:5000/upload-pitch", requestEntity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://13.209.93.170:5000/upload-pitch", requestEntity, String.class);
         return response.getBody();
     }
 
@@ -52,7 +52,7 @@ public class TestService {
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-        ResponseEntity<String> response = restTemplate.postForEntity("http://13.209.221.128:5000/upload-timbre", requestEntity, String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("http://13.209.93.170:5000/upload-timbre", requestEntity, String.class);
         return response.getBody();
     }
 }
