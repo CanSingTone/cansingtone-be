@@ -58,7 +58,7 @@ public class CombinedRecommendationService {
 
         // API 서버로 POST 요청 보내기
         ResponseEntity<String> response = restTemplate.postForEntity(
-                "http://13.209.221.128:5000/recommendation-combined",
+                "http://3.35.45.229:5000/recommendation-combined",
                 requestEntity,
                 String.class
         );
