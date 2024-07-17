@@ -84,7 +84,6 @@ public class CombinedRecommendationService {
                 recommendationsWithDetails.add(new ResCombinedRecommendationDto(recommendation, song));
             }
         }
-
         return recommendationsWithDetails;
     }
 }
