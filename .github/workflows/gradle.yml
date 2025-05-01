@@ -32,31 +32,36 @@ jobs:
         with:
           name: cicdsample
           path: build/libs/*.jar
-
+          
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v4  
+        uses: actions/download-artifact@v4
         with:
           name: cicdsample
-
+  
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
+  
       - name: Add SSH known_hosts
         run: ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
-
-      - name: Debug SSH connection
-        run: ssh -v ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} echo "SSH 연결 성공"
-
+  
+      - name: Configure SSH keep-alive
+        run: echo "ServerAliveInterval 60" >> ~/.ssh/config
+  
+      - name: Debug SCP transfer
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "ls -l ~/cicd/*.jar"
+  
       - name: SCP transfer
         run: scp *.jar ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:~/cicd
-
+  
       - name: Execute remote commands
         run: |
-          ssh -v ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "sudo fuser -k 8080/tcp"
-          ssh -v ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "sudo nohup java -jar ~/cicd/cansingtone-0.0.1-SNAPSHOT.jar --spring.config.location=file:/home/ubuntu/cansingtone-be/src/main/resources/application.properties &"
+          ssh -T ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+          sudo fuser -k 8080/tcp
+          sudo nohup java -jar ~/cicd/cansingtone-0.0.1-SNAPSHOT.jar --spring.config.location=file:/home/ubuntu/cansingtone-be/src/main/resources/application.properties > app.log 2>&1 &
+          EOF
