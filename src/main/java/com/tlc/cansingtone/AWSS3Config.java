@@ -19,7 +19,6 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 @Service
-@PropertySource("classpath:application.properties")
 @NoArgsConstructor
 public class AWSS3Config {
     private AmazonS3 s3Client;
