@@ -53,9 +53,6 @@ jobs:
       - name: Configure SSH keep-alive
         run: echo "ServerAliveInterval 60" >> ~/.ssh/config
   
-      - name: Debug SCP transfer
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "ls -l ~/cicd/*.jar"
-  
       - name: SCP transfer
         run: scp *.jar ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:~/cicd
   
@@ -63,5 +60,5 @@ jobs:
         run: |
           ssh -T ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
           sudo fuser -k 8080/tcp
-          sudo nohup java -jar ~/cicd/cansingtone-0.0.1-SNAPSHOT.jar --spring.config.location=file:/home/ubuntu/cansingtone-be/src/main/resources/application.properties > app.log 2>&1 &
+          sudo nohup java -jar ~/cicd/cansingtone-0.0.1-SNAPSHOT.jar --spring.config.location=file:/home/ubuntu/cansingtone-be/src/main/resources/application.properties &
           EOF
